@@ -10,10 +10,20 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import models.Role;
 import models.User;
 import servlets.UserServlet;
 
 public class UserService {
+    
+      public static void generateAllUsers(UserDB userDB, HttpServletRequest request) {
+        try {
+            List<User> users = userDB.getAll();
+            request.setAttribute("users", users);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public static void deleteUser(String userEmailToDelete, UserDB userDB) {
         try {
@@ -40,17 +50,16 @@ public class UserService {
         try {
             User userToBeUpdated = userDB.get(emailToBeUpdated);
             int role = Integer.parseInt(request.getParameter("account_type"));
+            Role Userrole = new Role(role);
             userToBeUpdated.setFirstName(firstName);
             userToBeUpdated.setLastName(lastName);
-            userToBeUpdated.setRole(role);
+            userToBeUpdated.setRole(Userrole);
             userDB.update(userToBeUpdated);
 
         } catch (Exception ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-  
 
     public void addNewUser(String email, String firstName, String lastName, String password, UserDB userDB, HttpServletRequest request, int role) {
         User user = null;

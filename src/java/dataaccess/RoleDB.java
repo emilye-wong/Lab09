@@ -1,17 +1,17 @@
 package dataaccess;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import models.Role;
 
 public class RoleDB {
-    public Role get(String owner) {
 
+    public List<Role> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
-        try {
-            Role role = em.find(Role.class, owner);
+        try {             
+            List<Role> role = em.createQuery("SELECT * FROM role").getResultList();
             return role;
-
         } finally {
             em.close();
         }

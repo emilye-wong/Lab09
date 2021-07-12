@@ -1,23 +1,23 @@
-
 package services;
 
-import dataaccess.UserDB;
+import dataaccess.RoleDB;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import models.User;
+import models.Role;
+
 import servlets.UserServlet;
 
 public class RoleService {
 
-    public static void generateAllUsers(UserDB userDB, HttpServletRequest request) {
+    public static void getAllRoles(RoleDB roleDB, HttpServletRequest request) {
         try {
-            List<User> users = userDB.getAll();
-            request.setAttribute("users", users);
+            List<Role> roles = roleDB.getAll();
+            request.setAttribute("roles", roles);
         } catch (Exception ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
 
+    }
 }

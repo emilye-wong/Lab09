@@ -2,14 +2,8 @@ package servlets;
 
 import dataaccess.UserDB;
 import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import models.User;
-import services.RoleService;
 import services.UserService;
 
 public class UserServlet extends HttpServlet {
@@ -100,7 +94,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void generateUsers(UserDB userDB, HttpServletRequest request) {
-        RoleService.generateAllUsers(userDB, request);
+        UserService.generateAllUsers(userDB, request);
 
     }
 

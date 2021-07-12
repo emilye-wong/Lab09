@@ -3,18 +3,20 @@ package dataaccess;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 import models.User;
+import services.UserService;
 
 public class UserDB {
+    
+     UserService userService = new UserService();
 
     public List<User> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
-            // retrieves the user class constructor 
-            TypedQuery<User> query = em.createNamedQuery("Users.findAll", User.class);
-            return query.getResultList();
+            // retrieves the user class constructor             
+            List<User> user = em.createQuery("SELECT * FROM user").getResultList();
+            return user;
         } finally {
             em.close();
         }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import java.io.Serializable;
@@ -20,10 +15,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author emily
- */
 @Entity
 @Table(name = "role")
 @XmlRootElement
@@ -50,6 +41,10 @@ public class Role implements Serializable {
     public Role(int roleID, String roleName) {
         this.roleID = roleID;
         this.roleName = roleName;
+    }
+
+    public Role(int role) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
       public int getRoleID() {
