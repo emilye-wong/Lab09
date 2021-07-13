@@ -50,10 +50,10 @@ public class UserService {
         try {
             User userToBeUpdated = userDB.get(emailToBeUpdated);
             int role = Integer.parseInt(request.getParameter("account_type"));
-            Role Userrole = new Role(role);
+            Role userRole = new Role(role);
             userToBeUpdated.setFirstName(firstName);
             userToBeUpdated.setLastName(lastName);
-            userToBeUpdated.setRole(Userrole);
+            userToBeUpdated.setRole(userRole);
             userDB.update(userToBeUpdated);
 
         } catch (Exception ex) {

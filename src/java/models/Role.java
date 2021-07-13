@@ -28,7 +28,7 @@ public class Role implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "role_id")
-    private int roleID;
+    private Integer roleId;
     @Basic(optional = false)
     @Column(name = "role_name")
     private String roleName;
@@ -38,21 +38,21 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public Role(int roleID, String roleName) {
-        this.roleID = roleID;
+    public Role(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public Role(Integer roleId, String roleName) {
+        this.roleId = roleId;
         this.roleName = roleName;
     }
 
-    public Role(int role) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Integer getRoleId() {
+        return roleId;
     }
 
-      public int getRoleID() {
-        return roleID;
-    }
-
-    public void setRoleID(int roleID) {
-        this.roleID = roleID;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getRoleName() {
@@ -70,6 +70,31 @@ public class Role implements Serializable {
 
     public void setUserList(List<User> userList) {
         this.userList = userList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (roleId != null ? roleId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Role)) {
+            return false;
+        }
+        Role other = (Role) object;
+        if ((this.roleId == null && other.roleId != null) || (this.roleId != null && !this.roleId.equals(other.roleId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "" + roleId;
     }
     
 }

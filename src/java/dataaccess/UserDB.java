@@ -15,7 +15,7 @@ public class UserDB {
 
         try {
             // retrieves the user class constructor             
-            List<User> user = em.createQuery("SELECT * FROM user").getResultList();
+            List<User> user = em.createNamedQuery("User.findAll", User.class).getResultList();
             return user;
         } finally {
             em.close();
@@ -42,6 +42,7 @@ public class UserDB {
             trans.begin();
             // the insert statement
             em.persist(user);
+            em.merge(user);
             trans.commit();
         } catch (Exception e) {
             trans.rollback();
@@ -69,11 +70,13 @@ public class UserDB {
     public void delete(String email) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
+        User user = em.find(User.class, email);
 
         try {
             trans.begin();
             // the delete statement 
-            em.remove(em.merge(email));
+            em.remove(em.merge(user));
+            em.merge(user);
             trans.commit();
         } catch (Exception e) {
             trans.rollback();

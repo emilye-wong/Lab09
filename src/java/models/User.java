@@ -44,18 +44,25 @@ public class User implements Serializable {
     private String password;
     @JoinColumn(name = "role", referencedColumnName = "role_id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private int role;
+    private Role role;
 
     public User() {
     }
 
-    public User(String email, boolean active, String firstName, String lastName, String password, int role) {
+    public User(String email) {
+        this.email = email;
+    }
+
+    public User(String email, boolean active, String firstName, String lastName, String password) {
         this.email = email;
         this.active = active;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.role = role;
+    }
+    
+    public User(String email, boolean active, String firstName, String lastName, String password, int role) {
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     public String getEmail() {
@@ -70,13 +77,8 @@ public class User implements Serializable {
         return active;
     }
 
-      public void setActive(int number) {
-        if (number == 1) {
-            this.active = true;
-
-        } else {
-            this.active = false;
-        }
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getFirstName() {
@@ -103,15 +105,37 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public void setRole(Role Userrole) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (email != null ? email.hashCode() : 0);
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof User)) {
+            return false;
+        }
+        User other = (User) object;
+        if ((this.email == null && other.email != null) || (this.email != null && !this.email.equals(other.email))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "models.User[ email=" + email + " ]";
+    }
+    
 }
