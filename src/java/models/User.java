@@ -135,7 +135,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "models.User[ email=" + email + " ]";
+        return "" + email;
     }
     
 }
